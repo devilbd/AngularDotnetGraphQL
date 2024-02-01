@@ -1,0 +1,11 @@
+<div class="flex-container-vertical">
+    <div class="main-menu flex-item flex-grow-1">
+        <a class="button" [routerLink]="['/identity-manager']">
+            <img class="icon" src="/assets/users.png" />
+            <div class="text">Identity manager</div>
+        </a>
+    </div>
+    <div class="flex-item flex-grow-99">
+        <router-outlet />
+    </div>
+</div>

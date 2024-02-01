@@ -1,0 +1,38 @@
+:host {
+  display: block;
+}
+
+
+.user {
+  margin: 10px;
+}
+
+.user-id-text {
+  width: 200px;
+  background-color: var(--success-color);
+  border: 1px dashed var(--main-border);
+  padding: 5px 8px;
+  color: black;
+}
+
+.role-id-text {
+  width: 200px;
+}
+
+.roles {
+  margin-left: 20px;
+}
+
+.role {
+  border: 1px dashed transparent;
+  padding: 5px 8px;
+}
+
+.role:hover {
+  cursor: pointer;
+  background-color: var(--main-color);
+  color: black;
+  opacity: 0.7;
+  border: 1px dashed var(--main-border);
+  border-radius: 5px;
+}

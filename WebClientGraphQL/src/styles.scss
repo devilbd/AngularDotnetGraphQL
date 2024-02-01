@@ -1,0 +1,62 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+    --main-background-color: #332c4d;
+    --main-color: #d3def5;
+    --success-color: #00fc7e;
+    --main-border: #202020;
+}
+
+html, body {
+    background-color: var(--main-background-color);
+    color: var(--main-color);
+}
+
+.button {
+    padding: 8px 12px;
+    background-color: var(--success-color);
+    color: var(--main-background-color);
+    border: 1px solid transparent;
+    border-radius: 5px;
+}
+
+.button .icon {
+    vertical-align: middle;
+    display: inline-block;
+    width: 40px;
+}
+
+.button .text {
+    display: inline-block;
+}
+
+.button:hover {
+    box-shadow: 0 0 8px var(--main-border);
+    cursor: pointer;
+    border: 1px dashed var(--main-border);
+}
+
+.flex-container-vertical {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-container-horizontal {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .flex-item {
+    flex: 1 auto;
+  }
+  
+  .flex-grow-1 {
+    flex-grow: 1;
+  }
+  
+  .flex-grow-3 {
+    flex-grow: 3;
+  }
+
+  .flex-grow-99 {
+    flex-grow: 99;
+  }

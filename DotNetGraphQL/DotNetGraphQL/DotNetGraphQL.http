@@ -1,0 +1,6 @@
+@DotNetGraphQL_HostAddress = http://localhost:5048
+
+GET {{DotNetGraphQL_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
