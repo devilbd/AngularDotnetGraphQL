@@ -1,0 +1,27 @@
+:host {
+  display: block;
+}
+
+.create-user-root {
+  text-align: center;
+  padding: 20px;
+}
+
+.form {
+  display: inline-block;
+  background-color: var(--main-border);
+  padding: 20px 60px;
+  border: 1px dashed var(--second-background-color);
+}
+
+.check-box-row {
+  text-align: left;
+}
+
+.check-box-row label {
+  display: inline-block;
+}
+
+.check-box-row input[type="checkbox"] {
+  display: inline-block;
+}

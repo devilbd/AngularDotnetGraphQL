@@ -1,18 +1,40 @@
 <div>
     <div style="display: inline-block;">
-        <div>Users</div>
         @for (user of viewModel.users; track user.name) {
-            <div class="user flex-container-horizontal">
-                <div class="user-id-text flex-item">{{ user.name }}</div>
-            </div>
-            <div class="roles">
-                <div>Roles</div>
-                @for(role of user.roles; track role.name) {
-                    <div class="role flex-container-horizontal">
-                        <div class="role-id-text flex-item">{{ role.name }}</div>
+            <div class="user">
+                <div class="flex-container-horizontal">
+                    <div class="user-id-text flex-item">
+                        <span class="user-id-text-label">ID:</span>
+                        <span>{{ user.id }}</span>
                     </div>
-                }
+                    <div class="user-id-text flex-item">
+                        <span class="user-id-text-label">Username:</span>
+                        <span>{{ user.name }}</span>
+                    </div>
+                    <div class="user-id-text flex-item">
+                        <span class="user-id-text-label">Email address:</span>
+                        <span>{{ user.emailAddress }}</span>
+                    </div>
+                    <button (click)="onDelete(user)" class="button error flex-item">
+                        X
+                    </button>
+                </div>
+                <div class="roles">
+                    <div>Roles</div>
+                    @for(role of user.roles; track role.name) {
+                        <div class="role flex-container-horizontal">
+                            <div class="role-id-text flex-item">{{ role.name }}</div>                        
+                        </div>
+                    }
+                </div>
             </div>
         }
     </div>
+    <app-window-box #confirmDeleteWindowBox>
+        <app-confirm-user-delete 
+            [userForDelete]="viewModel.userForDelete" 
+            (confirmed)="onConfirm($event)" 
+            (cancelled)="onCancel($event)">
+        </app-confirm-user-delete>
+    </app-window-box>
 </div>
