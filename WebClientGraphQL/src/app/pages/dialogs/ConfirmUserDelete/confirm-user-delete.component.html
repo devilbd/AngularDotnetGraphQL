@@ -1,0 +1,10 @@
+<div class="window-box-title">Confirm delete of user {{ userForDelete?.id }} {{ userForDelete?.name }}</div>
+    <div class="window-box-content">Please confirm deletion of user {{ userForDelete?.emailAddress }}</div>
+    <div class="window-box-buttons">
+    <button class="button success" (click)="onConfirm($event)">
+        Confirm
+    </button>
+    <button class="button error" (click)="onCancel($event)">
+        Cancel
+    </button>
+</div>

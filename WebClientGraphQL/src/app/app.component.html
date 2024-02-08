@@ -1,8 +1,10 @@
-<div class="flex-container-vertical">
+<div class="app-component-root flex-container-vertical">
     <div class="main-menu flex-item flex-grow-1">
         <a class="button" [routerLink]="['/identity-manager']">
-            <img class="icon" src="/assets/users.png" />
             <div class="text">Identity manager</div>
+        </a>
+        <a class="button" [routerLink]="['/create-user']">
+            <div class="text">Create new user</div>
         </a>
     </div>
     <div class="flex-item flex-grow-99">

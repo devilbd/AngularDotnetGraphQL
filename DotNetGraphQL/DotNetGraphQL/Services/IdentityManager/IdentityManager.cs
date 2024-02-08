@@ -1,67 +1,103 @@
-﻿using DotNetGraphQL.Models;
+﻿using DotNetGraphQL.Data;
+using DotNetGraphQL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DotNetGraphQL.Services.IdentityManager
 {
     public class IdentityManager : IIdentityManager
     {
-        public List<User> Users { get; set; }
-        public List<Role> Roles { get; set; }
-        public List<UserToRoles> UserToRoles { get;set; } = new List<UserToRoles>();
-        public IdentityManager()
-        {
-            MockUp();
+        private readonly PostgreSQLDbContext _DbContext;
+
+        public IdentityManager(PostgreSQLDbContext dbContext) 
+        { 
+            _DbContext = dbContext;
         }
 
-        private void MockUp()
+        public async Task<List<User>> GetUsersAsync(bool includeRoles = false)
         {
-            Roles = new List<Role>
+            try
             {
-                new Role { Id = 1, Name = "Admin" },
-                new Role { Id = 2, Name = "Moderator" },
-                new Role { Id = 3, Name = "User" }
-            };
-
-            Users = new List<User>
-            {
-                new User { Id = 1, Name = "adminstrator@****admin.com", Roles = new List<Role>() },
-                new User { Id = 2, Name = "moderator123@****kk.com", Roles = new List<Role>() },
-                new User { Id = 3, Name = "standarduser@****kk.com", Roles = new List<Role>() },
-            };
-            AddUsersToRoles();
-        }
-
-        private void AddUsersToRoles()
-        {
-            foreach(var user in Users)
-            {
-                UserToRoles.Add(new UserToRoles
+                List<User> result;
+                if (includeRoles)
                 {
-                    UserId = user.Id,
-                    RoleId = Roles[2].Id
-                });
-                user.Roles.Add(new Role
+                    result = await _DbContext.Users.Include(x => x.Roles).ToListAsync();
+                } else
                 {
-                    Id = Roles[2].Id,
-                    Name = Roles[2].Name,
-                    UserId = user.Id,
-                });
+                    result = await _DbContext.Users.ToListAsync();
+                }
+                return result;
             }
-
-            UserToRoles.Add(new UserToRoles { UserId = Users[0].Id, RoleId = Roles[0].Id });
-            Users[0].Roles.Add(new Role
+            catch (Exception ex)
             {
-                Id= Roles[0].Id,
-                Name = Roles[0].Name,
-                UserId = Users[0].Id,
-            });
+                return null;
+            }
+        }
 
-            UserToRoles.Add(new UserToRoles { UserId = Users[1].Id, RoleId = Roles[1].Id });
-            Users[1].Roles.Add(new Role
+        public async Task<List<Role>> GetRolesAsync()
+        {
+            try
             {
-                Id = Roles[1].Id,
-                Name = Roles[1].Name,
-                UserId = Users[1].Id,
-            });
+                var result = await _DbContext.Roles.ToListAsync();
+                return result;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<User> CreateUserAsync(User user)
+        {
+            try
+            {
+                await _DbContext.Users.AddAsync(user);
+                await _DbContext.SaveChangesAsync();
+                return user;
+            }
+            catch (Exception ex) 
+            {
+                return null;
+            }
+        }
+
+        public async Task<User> ModifyUserAsync(User user)
+        {
+            try
+            {
+                var userEntry = await _DbContext.Users.FirstOrDefaultAsync(x => x.Id == user.Id);
+                if (userEntry != null)
+                {
+                    userEntry.EmailAddress = user.EmailAddress;
+                    userEntry.Password = user.Password;
+                    userEntry.PasswordSalt = user.PasswordSalt;
+                    userEntry.Roles = user.Roles;
+
+                    _DbContext.Entry(userEntry).State = EntityState.Modified;
+                    await _DbContext.SaveChangesAsync();
+                    return user;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<User> RemoveUserAsync(long userId)
+        {
+            try
+            {
+                var user = await _DbContext.Users.FirstOrDefaultAsync(x => x.Id == userId);
+                _DbContext.Users.Remove(user);
+                _DbContext.Entry(user).State = EntityState.Deleted;
+                await _DbContext.SaveChangesAsync();
+                return user;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }

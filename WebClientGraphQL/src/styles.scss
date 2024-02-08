@@ -1,14 +1,63 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
     --main-background-color: #332c4d;
+    --second-background-color: #5c45df;
     --main-color: #d3def5;
     --success-color: #00fc7e;
+    --disabled: #1e5a43;
+    --error-color: #d3285c;
     --main-border: #202020;
 }
 
-html, body {
+html, body, .app-root {
     background-color: var(--main-background-color);
     color: var(--main-color);
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+
+*:focus {
+  outline: none;
+}
+
+.input-wrapper {
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--second-background-color);
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid transparent;
+
+  &:hover {
+    border: 1px dashed var(--main-border);
+    cursor: pointer;
+  }
+}
+
+.input-wrapper label {
+  text-align: center;
+  flex: 1 auto;
+}
+
+.input {
+  flex: 1 auto;
+  border-radius: 5px;
+  background-color: var(--main-background-color);
+  color: var(--main-color);
+  border: 1px dashed var(--main-border);
+  padding: 5px 8px;
+  margin-bottom: 10px;
+  &:focus {
+    border: 1px dashed var(--success-color);
+  }
+
+  &.error {
+    border: 1px dashed var(--error-color);
+  }
 }
 
 .button {
@@ -17,6 +66,14 @@ html, body {
     color: var(--main-background-color);
     border: 1px solid transparent;
     border-radius: 5px;
+    margin: 5px;
+    display: inline-block;
+    &.error {
+      background-color: var(--error-color);
+    }
+    &:disabled {
+      background-color: var(--disabled);
+    }
 }
 
 .button .icon {

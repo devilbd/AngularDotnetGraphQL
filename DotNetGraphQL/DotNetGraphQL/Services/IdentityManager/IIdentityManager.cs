@@ -4,7 +4,10 @@ namespace DotNetGraphQL.Services.IdentityManager
 {
     public interface IIdentityManager
     {
-        List<User> Users { get; set; }
-        List<Role> Roles { get; set; }
+        Task<List<Role>> GetRolesAsync();
+        Task<List<User>> GetUsersAsync(bool includeRoles = false);
+        Task<User> CreateUserAsync(User user);
+        Task<User> ModifyUserAsync(User user);
+        Task<User> RemoveUserAsync(long userId);
     }
 }

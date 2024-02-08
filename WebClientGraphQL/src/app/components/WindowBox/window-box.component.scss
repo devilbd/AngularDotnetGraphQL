@@ -1,0 +1,53 @@
+:host {
+  
+}
+
+.root {
+  display: none;
+  position: absolute;
+  top: 35%;
+  left: 45%;
+  z-index: 5000;
+  background-color: black;
+  opacity: 0.7;
+  border-radius: 5px;
+}
+
+.window-box-title {
+  background-color: var(--main-background-color);
+  padding: 5px 7px;
+  border: 1px dashed black;
+}
+
+.window-box-content {
+  min-height: 100px;
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px dashed var(--main-background-color);
+  border-bottom: none;
+}
+
+.window-box-buttons {
+  text-align: right;
+  border-top: none;
+  border: 1px dashed var(--main-background-color);
+}
+
+.window-box-cover-plane {
+  opacity: 0.05;
+  background-color: black;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 4999;
+  display: none;
+  &.visible {
+    display: block;
+  }
+}
+
+.visible {
+  display: block!important;
+}
