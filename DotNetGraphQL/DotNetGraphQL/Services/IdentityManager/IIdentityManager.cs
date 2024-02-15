@@ -9,5 +9,6 @@ namespace DotNetGraphQL.Services.IdentityManager
         Task<User> CreateUserAsync(User user);
         Task<User> ModifyUserAsync(User user);
         Task<User> RemoveUserAsync(long userId);
+        Task<User> GetUserByIdAsync(long userId);
     }
 }

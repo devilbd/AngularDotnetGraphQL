@@ -15,6 +15,9 @@
                         <span class="user-id-text-label">Email address:</span>
                         <span>{{ user.emailAddress }}</span>
                     </div>
+                    <a [routerLink]="['/edit-user', user.id]" class="button error flex-item">
+                        Edit
+                    </a>
                     <button (click)="onDelete(user)" class="button error flex-item">
                         X
                     </button>

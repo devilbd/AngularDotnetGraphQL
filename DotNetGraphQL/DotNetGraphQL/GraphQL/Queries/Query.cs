@@ -16,5 +16,11 @@ namespace DotNetGraphQL.GraphQL.Queries
             var users = await identityManager.GetUsersAsync(includeRoles);
             return users;
         }
+
+        public async Task<User> GetUserById(long userId, CancellationToken cancellationToken, [Service] IIdentityManager identityManager)
+        {
+            var selectedUser = await identityManager.GetUserByIdAsync(userId);
+            return selectedUser;
+        }
     }
 }

@@ -5,6 +5,7 @@ import { IdentityManagerPageVM } from './models/identity-manager-page.viewmodel'
 import { User } from '../../models/user';
 import { WindowBoxComponent } from '../../components/WindowBox/window-box.component';
 import { ConfirmUserDeleteComponent } from '../dialogs/ConfirmUserDelete/confirm-user-delete.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-identity-manager-page',
@@ -12,7 +13,8 @@ import { ConfirmUserDeleteComponent } from '../dialogs/ConfirmUserDelete/confirm
   imports: [
     CommonModule,
     WindowBoxComponent,
-    ConfirmUserDeleteComponent
+    ConfirmUserDeleteComponent,
+    RouterLink
   ],
   templateUrl: './identity-manager-page.component.html',
   styleUrl: './identity-manager-page.component.scss',

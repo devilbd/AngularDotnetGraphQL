@@ -99,5 +99,18 @@ namespace DotNetGraphQL.Services.IdentityManager
                 return null;
             }
         }
+
+        public async Task<User> GetUserByIdAsync(long userId)
+        {
+            try
+            {
+                var user = await _DbContext.Users.Include(x => x.Roles).FirstOrDefaultAsync(x => x.Id == userId);
+                return user;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 }

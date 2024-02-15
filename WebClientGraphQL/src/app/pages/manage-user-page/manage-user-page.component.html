@@ -1,0 +1,34 @@
+<div class="create-user-root">
+    <form class="form" [formGroup]="userForm" (ngSubmit)="onCreateUser($event)">
+        <div class="input-wrapper">
+            <label for="name">Name </label>
+            <input class="input" [ngClass]="{ 'error': userForm.get('name')?.errors?.['required'] }" type="text" formControlName="name" />
+        </div>
+        <div class="input-wrapper">
+            <label for="emailAddress">Email address </label>
+            <input class="input" [ngClass]="{ 'error': userForm.get('emailAddress')?.errors?.['required'] }" type="text" formControlName="emailAddress" />
+        </div>
+        <div class="input-wrapper" *ngIf="!userForEdit">
+            <label for="password">Password </label>
+            <input class="input" [ngClass]="{ 'error': userForm.get('password')?.errors?.['required'] }" type="password" formControlName="password" />
+        </div>
+        <div>
+            <label for="roles">Roles </label>
+            <div>
+                @for(role of allRoles; track role.name) {
+                    <div class="check-box-row">
+                        <input type="checkbox" (change)="onCheckRole(role)" [checked]="roleChecked(role)" />
+                        <label>{{ role.name }}</label>
+                    </div>
+                }
+            </div>
+        </div>
+        {{ userForm.valid }}
+        <button *ngIf="userForEdit" class="button success" type="submit" [disabled]="!userForm.valid || userForm.get('roles')?.value?.length === 0">
+            Save
+        </button>
+        <button *ngIf="!userForEdit" class="button success" type="submit" [disabled]="!userForm.valid || userForm.get('roles')?.value?.length === 0">
+            Create
+        </button>
+    </form>
+</div>

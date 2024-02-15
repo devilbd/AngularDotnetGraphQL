@@ -18,6 +18,31 @@ export class DataService {
 
     constructor(private apollo: Apollo) {}
 
+    async getUserById(userId: number) {
+      const query = this.apollo.watchQuery({
+          query: gql`
+            query getUserById($userId: Long!) {
+              userById(userId: $userId) {
+                id
+                name
+                emailAddress
+                roles {
+                  id
+                  name      
+                }
+              }
+            }
+          `,
+          variables: {
+            userId: userId
+          }
+        }
+      );
+      const result = await query.refetch();
+      const resultValue = (<any>result).data.userById as User;
+      return resultValue;
+    }
+
     async getUsersAsync() {
       const usersQuery = this.apollo.watchQuery({
         query: gql`
